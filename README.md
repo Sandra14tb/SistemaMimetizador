@@ -1,4 +1,6 @@
-**INSITUTO TECNOLOGICO DE LEÓN.**
+# Practica3 Sistema Mimetizador
+
+**INSTITUTO TECNOLOGICO DE LEÓN.**
 
 	Integrantes:
 				- Godinez Guerrero Sandra Luz.
