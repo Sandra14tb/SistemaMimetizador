@@ -47,3 +47,4 @@ El sistema debe de contener; *Una interfaz de Hardware para navegar entre los me
 	
 **Procedimiento.**
 
+<a href="https://github.com/AngelesAmaro/SistemaMimetizador"><img src="InterfazJava.jpg"></a>
