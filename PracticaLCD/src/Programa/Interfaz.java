@@ -7,6 +7,7 @@ Maria de los Angeles Espinoza Amaro
  */
 package Programa;
 
+//Importar librerias
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import java.io.IOException;
@@ -16,17 +17,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 
-/**
- *
- * @author Sandra Luz
- */
+
 public class Interfaz extends javax.swing.JFrame {
 //variable para limitar que el textArea tenga menos de 140 caracteres
 int limite = 140;
 
+int contador = 0;
+
 //Variable para almacenar el texto del textArea
 String cadena = "";
+//Declarar arreglo para guardar hasta 10 mensajes
+String [] mensajes = new String[10];
 
+//Variables para realizar conexion con arduino via Serial
 private OutputStream Output = null;
 SerialPort serialPort;
 private final String PORT_NAME = "COM5";
@@ -72,9 +75,11 @@ public void ArduinoConnection() {
 
     }
  
+//Metodo para enviar datos de Java al arduino
     private void EnviarDatos(String data) {
 
         try {
+            //Mandar el texto del textArea
             Output.write(data.getBytes());
 
         } catch (IOException e) {
@@ -106,6 +111,11 @@ public void ArduinoConnection() {
         Imagen2 = new javax.swing.JLabel();
         imagen1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtBorrar = new javax.swing.JTextField();
+        btnLimpiar = new javax.swing.JButton();
+        btnBorrarTodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Comunicacion via Serial");
@@ -151,8 +161,45 @@ public void ArduinoConnection() {
 
         imagen1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Programa/flecha.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
-        jLabel1.setText("Comunicación Via Serial ");
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jLabel1.setText("Insertar un número del 0 al 9 para elegir que # de mensaje borrar");
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        jLabel2.setText("Comunicación Via Serial ");
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jLabel3.setText("Insertar mensaje:");
+
+        txtBorrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBorrarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseClicked(evt);
+            }
+        });
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnBorrarTodo.setText("Borrar Todos");
+        btnBorrarTodo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBorrarTodoMouseClicked(evt);
+            }
+        });
+        btnBorrarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarTodoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,43 +208,79 @@ public void ArduinoConnection() {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(67, 67, 67)
-                                .addComponent(BtnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(104, 104, 104)
-                        .addComponent(imagen1)
-                        .addGap(49, 49, 49)
-                        .addComponent(Imagen2))
+                        .addGap(98, 98, 98)
+                        .addComponent(txtBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
+                        .addComponent(BtnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnBorrarTodo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(469, 469, 469)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel1)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(1198, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(162, 162, 162)
+                .addComponent(imagen1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Imagen2)
+                .addGap(117, 117, 117))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(479, 479, 479)
+                    .addComponent(jLabel2)
+                    .addContainerGap(917, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(180, 180, 180)
+                    .addComponent(jLabel3)
+                    .addContainerGap(1474, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(jLabel1)
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(63, 63, 63)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BtnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(imagen1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Imagen2)
-                        .addGap(28, 28, 28)))
-                .addContainerGap(161, Short.MAX_VALUE))
+                        .addGap(314, 314, 314)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Imagen2)
+                            .addComponent(imagen1))
+                        .addGap(75, 75, 75)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                        .addGap(1, 1, 1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnBorrarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(110, 110, 110)
+                    .addComponent(jLabel2)
+                    .addContainerGap(616, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(277, 277, 277)
+                    .addComponent(jLabel3)
+                    .addContainerGap(470, Short.MAX_VALUE)))
         );
 
         pack();
@@ -224,10 +307,20 @@ public void ArduinoConnection() {
 
     private void BtnBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBorrarMouseClicked
         //Acciones del boton borrar
-        txtMensaje.setText(" ");
         //En el programa de arduino se detecta el caracter para que se borre el texto en el LCD
+//        cadena = "~";
+//        EnviarDatos(cadena);
+        int num= Integer.parseInt(txtBorrar.getText());
+        mensajes[num] = " ";
+        String mensajeCompleto = "";
+        for (int s = 0; s < contador; s++) {
+            mensajeCompleto+=mensajes[s];
+            
+        }
         cadena = "~";
         EnviarDatos(cadena);
+        System.out.println(mensajeCompleto);
+        EnviarDatos(mensajeCompleto);
     }//GEN-LAST:event_BtnBorrarMouseClicked
 
     private void BtnAgregarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAgregarKeyPressed
@@ -235,18 +328,52 @@ public void ArduinoConnection() {
     }//GEN-LAST:event_BtnAgregarKeyPressed
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
+        
         //guardar en la variable cadena , el texto del TextArea
         cadena = txtMensaje.getText();
         //Imprimir el mensaje
-        System.out.println(cadena);
+        //System.out.println(cadena);
         //Obtener la fecha a la que se envia
         Date date = new Date();
         DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-       String hora = hourdateFormat.format(date);
-        System.out.println("Hora y fecha: "+hora);
+        String hora = hourdateFormat.format(date);
+        //System.out.println("Hora y fecha: "+hora);
         cadena = hora+" "+cadena;
+        mensajes[contador] = cadena;
+        String mensajeCompleto = "";
+        contador++;
+        for (int s = 0; s < contador; s++) {
+            mensajeCompleto+=" "+mensajes[s];
+        }
+        System.out.println(mensajeCompleto);
+        cadena = "~";
         EnviarDatos(cadena);
+        EnviarDatos(mensajeCompleto);
+        
     }//GEN-LAST:event_BtnAgregarMouseClicked
+
+    private void txtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBorrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBorrarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
+        //Limpiar el textArea
+        txtMensaje.setText("");
+    }//GEN-LAST:event_btnLimpiarMouseClicked
+
+    private void btnBorrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarTodoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBorrarTodoActionPerformed
+
+    private void btnBorrarTodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarTodoMouseClicked
+        // Boton para borrar todos los mensajes
+        cadena = "~";
+        EnviarDatos(cadena);
+    }//GEN-LAST:event_btnBorrarTodoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -288,9 +415,14 @@ public void ArduinoConnection() {
     private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnBorrar;
     private javax.swing.JLabel Imagen2;
+    private javax.swing.JButton btnBorrarTodo;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel imagen1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtBorrar;
     private javax.swing.JTextArea txtMensaje;
     // End of variables declaration//GEN-END:variables
 }
