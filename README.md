@@ -2,13 +2,16 @@
 
 **INSTITUTO TECNOLOGICO DE LEÓN.**
 
+
 	Integrantes:
 				- Godinez Guerrero Sandra Luz.
 				- Santos Salas Abril Alejandra.
 				- Espinoza Amaro Maria de los Angeles.
+				
         
 	Sistemas Programables.
 				-Ing. Carlos Rafael Levy Rojas.
+				
 
 Practica 3 Sistema Mimetizador
 
