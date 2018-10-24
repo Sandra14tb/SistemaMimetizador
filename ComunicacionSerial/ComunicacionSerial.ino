@@ -1,3 +1,11 @@
+/*
+ Sistema mimetizador visualizador de mensajes
+Comunicación via serial con arduino Uno
+Sandra Luz Godinez Guerrero
+Abril Alejandra Santos Salas
+Maria de los Angeles Espinoza Amaro
+ */
+
 //Libreria del LCD
 #include <LiquidCrystal.h>
 //Libreria del sensor de temperatura y humedad
@@ -25,7 +33,7 @@ DHT dht(DHTPin, DHTTYPE);
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 // Velocidad a la que se mueve el texto en el display
-#define velocidad 200
+#define velocidad 2000
 
 
 //Variable para guardar el Mensaje que se va a mandar desde java
@@ -62,28 +70,31 @@ void loop() {
   
   //Concatenar el texto enviado en Java y el de los calculos hechos 
   String mensajeCompleto = mensajeCalculo;
-  mensajeCompleto.concat(" Mensaje: ");
+  mensajeCompleto.concat(": ");
   mensajeCompleto.concat(Mensaje);
   caracteres = mensajeCompleto.length(); //Se lee la cantidad de caracteres del mensaje que viene desde Java
-
+  int repeticion = caracteres / 16;
+  int sub = 0;
   // Desplazamos el texto hacia la izquierda en la segunda fila
-  for(int i=1;i<=caracteres;i++)
+  for(int i=0;i<=repeticion;i++)
   {
-    String texto = mensajeCompleto.substring(i-1);
+    String texto = mensajeCompleto.substring(sub,(sub+16));
+    Serial.println(texto);
     // Limpiamos pantalla
     lcd.clear();
  
     //Situamos el cursor
-    lcd.setCursor(0, 0);
+    //lcd.setCursor(0,0);
  
     // Escribimos el texto
     lcd.print(texto);
  
     // Esperamos
     delay(velocidad);
+    sub = sub + 16;
   }
 
-  delay(1000); //Se espera un segundo
+  //delay(3000); //Se espera un segundo
 
 }
 
