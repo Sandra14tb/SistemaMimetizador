@@ -56,6 +56,7 @@ void setup() {
   dht.begin();
 }
 
+
 void loop() {
   while (Serial.available() > 0) { //Ciclo que se ejecutará mientras halla caracteres que se puedan leer en el puerto Serie
     //En la comunicación serial se envían los mensajes caracter a caracter, por lo que tenemos que leerlos 1 a 1
@@ -75,6 +76,7 @@ void loop() {
   caracteres = mensajeCompleto.length(); //Se lee la cantidad de caracteres del mensaje que viene desde Java
   int repeticion = caracteres / 16;
   int sub = 0;
+ 
   // Desplazamos el texto hacia la izquierda en la segunda fila
   for(int i=0;i<=repeticion;i++)
   {
