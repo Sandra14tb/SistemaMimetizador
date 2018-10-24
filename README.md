@@ -1,4 +1,4 @@
-# Practica3 Sistema Mimetizador
+# Practica 3 Sistema Mimetizador
 
 **INSTITUTO TECNOLOGICO DE LEÓN.**
 
@@ -10,7 +10,7 @@
 	Sistemas Programables.
 				-Ing. Carlos Rafael Levy Rojas.
 
-Practica3 Sistema Mimetizador
+Practica 3 Sistema Mimetizador
 
 Realice un sistema de despliegue de mensajes en una pantalla LCD, 
 el objetivo es que al llegar el individuo puedas ver un pequeño tablero electronico con una serie de mensajes o notas almacenados.
@@ -21,8 +21,8 @@ el objetivo es que al llegar el individuo puedas ver un pequeño tablero electro
 		*Además debe de mostrar un mensaje del estdo del tiempo (temperatura, luminocidad, humedad). 
     
     
-El sistema debe de contener; *Una interfaz de Hardware para navegar entre los mensajes. 
-
+El sistema debe de contener; 
+		*Una interfaz de Hardware para navegar entre los mensajes. 
 		*Una interfaz de software para enviar los mensajes desde la computadora via serial.
 		*La interfaz de software debe permitir agregar mensajes y/ó borrarlos.
 		
@@ -34,16 +34,18 @@ El sistema debe de contener; *Una interfaz de Hardware para navegar entre los me
 **Entorno.**
 
 	Para el desarrollo de esta practica se utilizo el sistema operativo Elementary OS 0.4.14, complementandose con windows 10, 
-	con apoyo de IDE ARDUINO, Fritzing 0.9.1 para la simulacion del circuito.
+	con apoyo de IDE ARDUINO, Fritzing 0.9.1 para la simulacion del circuito, Netbeans para el envio de mensajes con Java.
 	
 **Materiales usados.**
 
-	_Arduino UNO -Cable USB 
+	_Arduino UNO 
+	-Cable USB 
 	-Placa de prototipado o protoboard 
-	-10 cables
+	-Cables
 	-LCD 16x2
-	-Potencimetro 10KO
-	-2 Leds (Rojo,Azul) 
+	-Potencimetro 10K
+	-Sensor DHT11
+	-Fotoresistencia
 	-2 Resistencias de 220O y 10KO 
 	
 	
