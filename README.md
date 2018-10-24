@@ -47,4 +47,14 @@ El sistema debe de contener; *Una interfaz de Hardware para navegar entre los me
 	
 **Procedimiento.**
 
-<a href="https://github.com/AngelesAmaro/SistemaMimetizador"><img src="InterfazJava.jpg"></a>
+**Interfaz de Java**
+![Diseño en Java](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/InterfazJava.JPG?raw=true)
+
+**Simulado**
+![Simulado realizado en fritzing](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/Simulado.jpg?raw=true)
+
+**Diagrama de Esquema**
+![Esquema obtenido en fritzing](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/practica3_esquema.jpg?raw=true)
+
+
+
