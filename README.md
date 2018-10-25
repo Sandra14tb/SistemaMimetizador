@@ -7,6 +7,10 @@
 				- Godinez Guerrero Sandra Luz.
 				- Santos Salas Abril Alejandra.
 				- Espinoza Amaro Maria de los Angeles.
+	Contacto
+				sandy.goboo@gmail.com
+				angeles.espinoza.amaro@gmail.com
+				alejandra.santos.97@hotmail.com
 				
         
 	Sistemas Programables.
@@ -88,12 +92,18 @@ Para realizar dicho proyecto se investigaron algunas librerias que nos permitier
 **A continuación se presenta una sustracción de código el cual delimita los caracteres permitidos  que se establecen como requerimientos.**
 
 
-private void txtMensajeKeyPressed(java.awt.event.KeyEvent evt) {                                      
+private void txtMensajeKeyPressed(java.awt.event.KeyEvent evt) {  
+
         // Limitar el numero de caracteres a 140
+	
         if (txtMensaje.getText().length() + 1 > limite) {
+	
                     txtMensaje.setEditable(false);
+		    
                 } else {
+		
                     txtMensaje.setEditable(true);
+		    
                 }
             
     }
