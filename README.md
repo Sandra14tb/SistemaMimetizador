@@ -53,6 +53,8 @@ El sistema debe de contener;
 	
 	
 **Procedimiento.**
+Para realizar dicho proyecto se investigaron algunas librerias que nos permitieran la comunicación via serial entre arduino y Java, dicha libreria no forma parte como creacion propia de Java, es una implementacion de "PANAMA SERVICE". De igual forma en Arduino se implementan las librerias que nos permiten medir la temperatura, humedad, luminosidad etc.
+
 
 **Interfaz de Java**
 ![Diseño en Java](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/InterfazJava.JPG?raw=true)
@@ -63,5 +65,37 @@ El sistema debe de contener;
 **Diagrama de Esquema**
 ![Esquema obtenido en fritzing](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/practica3_esquema.jpg?raw=true)
 
+**Esquema Fisico Arduino 1**
+![Esquema Físico](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/arduino.jpeg?raw=true)
+
+**Esquema Fisico Arduino 1.1**
+![Esquema Físico](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/1.jpeg?raw=true)
+
+
+**Esquema Fisico Arduino 1.1.2**
+![Esquema Físico](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/2.jpeg?raw=true)
+
+
+**Esquema Fisico Arduino 1.1.3**
+![Esquema Físico](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/3.jpeg?raw=true)
+
+**Esquema Fisico Arduino 1.1.4**
+![Esquema Físico](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/4.jpeg?raw=true)
+
+**Esquema Fisico Arduino 1.1.5**
+![Esquema Físico](https://github.com/Sandra14tb/SistemaMimetizador/blob/master/5.jpeg?raw=true)
+
+**A continuación se presenta una sustracción de código el cual delimita los caracteres permitidos  que se establecen como requerimientos.**
+
+
+private void txtMensajeKeyPressed(java.awt.event.KeyEvent evt) {                                      
+        // Limitar el numero de caracteres a 140
+        if (txtMensaje.getText().length() + 1 > limite) {
+                    txtMensaje.setEditable(false);
+                } else {
+                    txtMensaje.setEditable(true);
+                }
+            
+    }
 
 
